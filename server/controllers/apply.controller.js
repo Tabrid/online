@@ -1,5 +1,5 @@
 // ApplyController.js
-
+import axios from 'axios';
 import Apply from "../models/apply.model.js";
 import User from "../models/user.model.js";
 class FileInfo {
@@ -80,6 +80,24 @@ export const getApplicationsByUserId = async (req, res) => {
     res.status(200).json(applications);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getApi = async (req, res) => {
+  const { nid, dob } = req.query;
+  if (!nid || !dob) {
+    return res.status(400).json({ error: "National ID and Date of Birth are required." });
+  }
+
+  try {
+    const apiUrl = `https://api.foxithub.com/unofficial/api.php?key=on9354&nid=${nid}&dob=${dob}`;
+    const response = await axios.get(apiUrl);
+    const data = response.data;
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

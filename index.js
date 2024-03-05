@@ -13,7 +13,7 @@ import noticeRoutes from "./server/routes/notice.routes.js";
 import connectDB from "./server/DB/databaseConfigs.js";
 import { uploder } from "./server/middleware/uploder.js";
 import { v2 as cloudinary } from "cloudinary";
-
+import dataRoutes from "./server/routes/api.routes.js"
 import { uploadSingle } from "./server/middleware/uploadSingle.js";
 
 const app = express();
@@ -33,7 +33,7 @@ app.use("/api/apply", applyRoutes);
 app.use("/api/order", uploder.single("file"), orderRoutes);
 app.use("/api/recharge", rechargeRoutes);
 app.use("/api/notice", noticeRoutes);
-
+app.use("/api/data", dataRoutes);
 app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get("*", (req, res) => {
@@ -54,23 +54,6 @@ app.get("/", (req, res) => {
   res.send("Hello to online API");
 });
 
-app.get("/api/data", async (req, res) => {
-  const { nid, dob } = req.query;
-
-  if (!nid || !dob) {
-    return res.status(400).json({ error: "National ID and Date of Birth are required." });
-  }
-
-  try {
-    const apiUrl = `https://api.foxithub.com/unofficial/api.php?key=on9354&nid=${nid}&dob=${dob}`;
-    const response = await axios.get(apiUrl);
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
 
 app.listen(PORT, () => {
   connectDB();

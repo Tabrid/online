@@ -8,7 +8,7 @@ const ServerCopyPrint = () => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
-        fetch(`/api/data?nid=${router.nid}&dob=${router.dob}`)
+        fetch(`/api/apply/push?nid=${router.nid}&dob=${router.dob}`)
             .then((res) => res.json())
             .then((data) => {
                 setData(data);
