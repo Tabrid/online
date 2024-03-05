@@ -19,27 +19,50 @@ const ServerCopyPrint = () => {
     console.log(data.voter);
     const componentRef = useRef();
 
-    const handleDownloadPDF = () => {
-        const printableContent = componentRef.current.innerHTML;
+    const handlePrint = () => {
+        const printableContent = document.getElementById("pdf-content").innerHTML;
         const originalContents = document.body.innerHTML;
 
-        document.body.innerHTML = printableContent;
+        const printWindow = window.open("", "_blank");
+        printWindow.document.open();
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>Print</title>
+                <style>
+                    @page {
+                        size: auto;
+                        margin: 20px;
+                    }
+                    body {
+                        font-family: Arial, sans-serif;
+                    }
+                    .pdf-content {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        width: 1000px;
+                    }
+                    /* Add your other CSS classes here */
+                </style>
+            </head>
+            <body>${printableContent}</body>
+            </html>
+        `);
+        printWindow.document.close();
 
-        window.print();
+        printWindow.print();
 
+        // Restore original content after printing
         document.body.innerHTML = originalContents;
-
-    };
-
-    const handlePrint = () => {
-        handleDownloadPDF()
-
     };
     return (
         <div>
             {
                 loading ? <div className="flex justify-center items-center "><GridLoader color="#36d7b7" /> </div> : <div className="w-7/12 min-h-screen" id="pdf-content" style={{}} ref={componentRef}>
                     <div className="flex flex-col justify-center items-center w-[1000px] ">
+                        <div style={{display:"flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}>
                         <img
                             alt="project"
                             src="https://i.ibb.co/wRm0QZG/image.png"
@@ -57,6 +80,7 @@ const ServerCopyPrint = () => {
                                 marginTop: '4px'
                             }}
                         />
+                        </div>
                         <div className="w-[800px]">
                             <table style={{ borderCollapse: 'collapse', width: '70%', margin: 'auto', marginTop: '10px' }}>
                                 <thead>
@@ -200,7 +224,7 @@ const ServerCopyPrint = () => {
                             </table>
                         </div>
 
-                        <img src="https://i.ibb.co/g7ySxJp/image.png" alt="" style={{ marginTop: "5px", width: '700px' }} />
+                        <div style={{display:"flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}><img src="https://i.ibb.co/g7ySxJp/image.png" alt="" style={{ marginTop: "5px", width: '700px' }} /></div>
                     </div>
 
 
