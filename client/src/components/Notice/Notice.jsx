@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 const Notice = () => {
     const [data , setData] = useState([]);
     useEffect(() => {
-        fetch('https://server-production-c6e7.up.railway.app/api/notice/notices')
+        fetch('/api/notice/notices')
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
