@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcryptjs";
+
 
 export const getUsersForSidebar = async (req, res) => {
 	try {
@@ -67,30 +69,31 @@ export const updateProfile = async (req, res) => {
 };
 
 
+
+// controllers/user.controller.js
+
 // controllers/user.controller.js
 
 export const updatePassword = async (req, res) => {
     try {
-        const  userId  = req.user._id;
+        const userId = req.user._id;
         const { oldPassword, newPassword } = req.body;
 
         // Find the user by userId
         const user = await User.findById(userId);
 
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({ message: "User not found" });
         }
 
-        // Check if old password matches
-        const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password);
+        const isPasswordCorrect = await bcrypt.compare(oldPassword, user?.password || "");
+        // Check if the old password matches
         if (!isPasswordCorrect) {
-            return res.status(400).json({ error: "Old password is incorrect" });
-        }
-
-        // Hash the new password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
-
+			return res.status(400).json({ message: "Invalid  password" });
+		}
+        // HASH PASSWORD HERE
+		const salt = await bcrypt.genSalt(10);
+		const hashedPassword = await bcrypt.hash(newPassword, salt);
         // Update user's password
         user.password = hashedPassword;
         await user.save();
@@ -124,3 +127,27 @@ export const findUserById = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+// controllers/user.controller.js
+
+// controllers/user.controller.js
+
+export const deleteUserById = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        // Delete the user by userId
+        const result = await User.deleteOne({ _id: userId });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+        console.log("Error in deleteUserById controller", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+

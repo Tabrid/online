@@ -19,6 +19,7 @@ import UpdatePassword from "../Pages/UpdatePassword/UpdatePassword";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import NoticeForm from "../Pages/NoticeForm/NoticeForm";
 import AdminRoutes from "./AdminRoutes";
+import AllUser from "../Pages/AllUser/AllUser";
 
 
  export const router = createBrowserRouter([
@@ -85,6 +86,10 @@ import AdminRoutes from "./AdminRoutes";
         {
           path: "/notice",
           element:<AdminRoutes><NoticeForm/></AdminRoutes> , 
+        },
+        {
+          path: "/all-user",
+          element:<AdminRoutes><AllUser/></AdminRoutes> , 
         },
         
       ],

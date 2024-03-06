@@ -62,30 +62,30 @@ const ServerCopyPrint = () => {
             {
                 loading ? <div className="flex justify-center items-center "><GridLoader color="#36d7b7" /> </div> : <div className="w-7/12 min-h-screen" id="pdf-content" style={{}} ref={componentRef}>
                     <div className="flex flex-col justify-center items-center w-[1000px] ">
-                        <div style={{display:"flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}>
-                        <img
-                            alt="project"
-                            src="https://i.ibb.co/wRm0QZG/image.png"
-                            className=""
-                            style={{ maxWidth: '100%', height: '150px' }}
-                        />
-                        <img
-                            src={data?.data?.data?.photo}
-                            alt=""
-                            style={{
-                                height: '120px',
-                                width: '100px',
-                                borderRadius: '10px',
-                                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-                                marginTop: '4px'
-                            }}
-                        />
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                            <img
+                                alt="project"
+                                src="https://i.ibb.co/wRm0QZG/image.png"
+                                className=""
+                                style={{ maxWidth: '100%', height: '150px' }}
+                            />
+                            <img
+                                src={data?.data?.data?.photo}
+                                alt=""
+                                style={{
+                                    height: '120px',
+                                    width: '100px',
+                                    borderRadius: '10px',
+                                    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
+                                    marginTop: '4px'
+                                }}
+                            />
                         </div>
                         <div className="w-[800px]">
                             <table style={{ borderCollapse: 'collapse', width: '70%', margin: 'auto', marginTop: '10px' }}>
                                 <thead>
                                     <tr>
-                                        <th className="" style={{ height: '3px', border: '1px solid lightblue', padding: '4px', backgroundColor: 'lightblue', width: '33.33%' }}>জাতীয় পরিচিতি তথ্য</th>
+                                        <th className="" style={{ height: '3px', border: '1px solid lightblue', padding: '4px', backgroundColor: 'lightblue', width: '33.33%',  textAlign: 'start'  }}>জাতীয় পরিচিতি তথ্য</th>
                                         <th style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', padding: '4px' }}></th>
 
                                     </tr>
@@ -121,7 +121,7 @@ const ServerCopyPrint = () => {
                             <table style={{ borderCollapse: 'collapse', width: '70%', margin: 'auto' }}>
                                 <thead>
                                     <tr>
-                                        <th className="" style={{ border: '1px solid #ADD8E6', padding: '4px', backgroundColor: 'lightblue', width: '33.33%' }}>ব্যক্তিগত তথ্য</th>
+                                        <th className="" style={{ border: '1px solid #ADD8E6', padding: '4px', backgroundColor: 'lightblue', width: '33.33%', textAlign: 'start'  }}>ব্যক্তিগত তথ্য</th>
                                         <th style={{ border: '1px solid #ADD8E6', backgroundColor: 'lightblue', padding: '4px' }}></th>
 
                                     </tr>
@@ -162,7 +162,9 @@ const ServerCopyPrint = () => {
                             <table style={{ borderCollapse: 'collapse', width: '70%', margin: 'auto' }}>
                                 <thead>
                                     <tr>
-                                        <th className="" style={{ border: '1px solid lightblue', padding: '4px', backgroundColor: 'lightblue', width: '33.33%' }}>অন্যান্য তথ্য</th>
+                                        <th className="" style={{ border: '1px solid lightblue', padding: '4px', backgroundColor: 'lightblue', width: '33.33%', textAlign: 'start' }}>অন্যান্য তথ্য</th>
+
+
                                         <th style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', padding: '4px' }}></th>
 
                                     </tr>
@@ -196,7 +198,7 @@ const ServerCopyPrint = () => {
                             <table style={{ borderCollapse: 'collapse', width: '70%', margin: 'auto' }}>
                                 <thead>
                                     <tr>
-                                        <th className="" style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', width: '15%' }}>বর্তমান ঠিকানা</th>
+                                        <th className="" style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', width: '15%' , textAlign: 'start' }}>বর্তমান ঠিকানা</th>
                                         <th className="" style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', width: '50%' }}></th>
 
                                     </tr>
@@ -211,7 +213,7 @@ const ServerCopyPrint = () => {
                             <table style={{ borderCollapse: 'collapse', width: '70%', margin: 'auto' }}>
                                 <thead>
                                     <tr>
-                                        <th className="" style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', width: '15%' }}>স্থায়ী ঠিকানা</th>
+                                        <th className="" style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', width: '15%',  textAlign: 'start'  }}>স্থায়ী ঠিকানা</th>
                                         <th className="" style={{ border: '1px solid lightblue', backgroundColor: 'lightblue', width: '50%' }}></th>
 
                                     </tr>
@@ -224,7 +226,7 @@ const ServerCopyPrint = () => {
                             </table>
                         </div>
 
-                        <div style={{display:"flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}><img src="https://i.ibb.co/g7ySxJp/image.png" alt="" style={{ marginTop: "5px", width: '700px' }} /></div>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}><img src="https://i.ibb.co/g7ySxJp/image.png" alt="" style={{ marginTop: "5px", width: '700px' }} /></div>
                     </div>
 
 

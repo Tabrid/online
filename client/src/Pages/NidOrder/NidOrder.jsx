@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../Context/AuthContext";
+import Marquee from "react-fast-marquee";
 const NidOrder = () => {
     const [nid, setNid] = useState('');
     const [dob, setDob] = useState('');
@@ -49,6 +50,9 @@ const NidOrder = () => {
         <div>
             <div className="max-w-md mx-auto mt-8">
                 <h2 className="text-xl font-bold mb-4">Order Form</h2>
+                <Marquee>
+                <h2 className="text-xl font-bold mb-4">💢আপনার একাউন্ট থেকে 130tk কেটে নেয়া হবে ।💢</h2>
+                </Marquee>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="nid" className="block text-sm font-medium text-gray-700">NID Number</label>

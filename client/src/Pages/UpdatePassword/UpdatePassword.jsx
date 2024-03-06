@@ -17,7 +17,7 @@ const UpdatePassword = () => {
             });
             const data = await response.json();
             console.log(data);
-            toast.success('Password updated successfully');
+            toast.success(data.message);
         } catch (error) {
             console.error('Error updating password:', error.message);
             toast.error('Something went wrong!');

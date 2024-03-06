@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthContext";
+import Marquee from "react-fast-marquee";
 
 
 const ServerCopy = () => {
@@ -50,6 +51,9 @@ const ServerCopy = () => {
         <div>
             <div className="max-w-md mx-auto mt-10 p-6 bg-gray-100 rounded-lg shadow-xl">
                 <h2 className="text-2xl font-semibold mb-4">Enter NID and Birthday</h2>
+                <Marquee>
+                <h2 className="text-xl font-bold mb-4">💢আপনার একাউন্ট থেকে 25tk কেটে নেয়া হবে ।💢</h2>
+                </Marquee>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="nid" className="block text-gray-700">

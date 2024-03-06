@@ -11,7 +11,7 @@ const Main = () => {
         <div>
             <Navbar />
             <div className="flex">
-                <div className="w-2/12 min-h-screen border-r-2 border-gray-950  sticky left-0">
+                <div className="hidden md:block lg:block w-2/12 min-h-screen border-r-2 border-gray-950  sticky left-0">
                     <div>
                         <p className="m-4  text-[12px]">অপশনস</p>
                         {
@@ -25,7 +25,10 @@ const Main = () => {
                                 <Link to="/my-order"><button className="btn w-3/4 mx-5 my-2">
                                     My Order</button></Link>
                                 <Link to="/my-recharge"><button className="btn w-3/4 mx-5 my-2">
-                                    My Recharge</button></Link></>
+                                    My Recharge</button></Link>
+                                <Link to="https://t.me/unofficial724"><button className="btn w-3/4 mx-5 my-2">
+                                    টেলিগ্রাম</button></Link>
+                            </>
                         }
                         {
                             authUser && authUser.role === 'admin' && <>
@@ -33,11 +36,12 @@ const Main = () => {
                                     All Order</button></Link>
                                 <Link to="/all-recharge"><button className="btn w-3/4 mx-5 my-2">
                                     All Recharge</button></Link>
+                                <Link to="/all-user"><button className="btn w-3/4 mx-5 my-2">
+                                    All User</button></Link>
                                 <Link to="/signup"><button className="btn w-3/4 mx-5 my-2">
                                     Add Account</button></Link></>
                         }
-                        <Link to="https://t.me/unofficial724"><button className="btn w-3/4 mx-5 my-2">
-                            টেলিগ্রাম</button></Link>
+
                         <p className="m-4 text-[12px]">একাউন্ট</p>
                         <Link to="/profile"><button className="btn w-3/4 mx-5 my-2">
                             প্রোফাইল</button></Link>
@@ -49,7 +53,7 @@ const Main = () => {
 
                     </div>
                 </div>
-                <div className="w-10/12 min-h-screen">
+                <div className="w-full lg:w-10/12 md:w-10/12 min-h-screen">
                     <Notice />
                     <Outlet />
                 </div>
