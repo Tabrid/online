@@ -38,6 +38,8 @@ const Main = () => {
                                     All Recharge</button></Link>
                                 <Link to="/all-user"><button className="btn w-3/4 mx-5 my-2">
                                     All User</button></Link>
+                                <Link to="/update-balance"><button className="btn w-3/4 mx-5 my-2">
+                                    Update Balance</button></Link>
                                 <Link to="/signup"><button className="btn w-3/4 mx-5 my-2">
                                     Add Account</button></Link></>
                         }

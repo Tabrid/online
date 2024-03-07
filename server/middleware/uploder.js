@@ -8,7 +8,6 @@ const storage = multer.diskStorage({
     filename(req, file, cb) {
         cb(null, `${file.fieldname}-${Date.now()}${Path.extname(file.originalname)}`);
     },
-
 });
 
 export const uploder = multer({

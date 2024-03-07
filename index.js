@@ -15,7 +15,7 @@ import { uploder } from "./server/middleware/uploder.js";
 import { v2 as cloudinary } from "cloudinary";
 import dataRoutes from "./server/routes/api.routes.js"
 import { uploadSingle } from "./server/middleware/uploadSingle.js";
-
+import balanceRoutes from './server/routes/balance.routes.js';
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -34,6 +34,7 @@ app.use("/api/order", uploder.single("file"), orderRoutes);
 app.use("/api/recharge", rechargeRoutes);
 app.use("/api/notice", noticeRoutes);
 app.use("/api/data", dataRoutes);
+app.use('/api/balance', balanceRoutes);
 app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get("*", (req, res) => {

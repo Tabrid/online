@@ -3,6 +3,7 @@ import fs from "fs";
 
 export const uploadSingle = async (req, res, next) => {
   try {
+    console.log(req.file.path, "req.file.path");
     const uploadResponse = await cloudinary.uploader.upload(req.file.path);
     fs.unlink(req.file.path, (err) => {
       if (err) {

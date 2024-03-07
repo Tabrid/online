@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../Context/AuthContext";
 import Marquee from "react-fast-marquee";
@@ -6,10 +6,24 @@ const NidOrder = () => {
     const [nid, setNid] = useState('');
     const [dob, setDob] = useState('');
     const { refresh , setRefresh, balance  } = useAuthContext();
+    const [Balance, setBalance] = useState({});
+    useEffect(() => {
+        const fetchBalance = async () => {
+          try {
+            const response = await fetch('/api/balance');
+            const data = await response.json();
+            setBalance(data);
+            
+          } catch (error) {
+            console.error('Error fetching balance:', error.message);
+          }
+        };
+        fetchBalance();
+      }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = { nidNumber:nid, birthday:dob };
-        if (balance < 130) {
+        if (balance < Balance.nidBalance) {
             toast.error('Insufficient balance!');
         }
         else{
@@ -27,7 +41,7 @@ const NidOrder = () => {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ balance: 130 }),
+                        body: JSON.stringify({ balance: Balance.nidBalance }),
                     })
                         .then((response) => response.json())
                         .then((data) => {

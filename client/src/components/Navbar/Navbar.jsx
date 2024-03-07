@@ -51,8 +51,10 @@ const Navbar = () => {
                                 All Order</button></Link></li>
                             <li> <Link to="/all-recharge"><button className="w-full mx-5 my-2">
                                 All Recharge</button></Link></li>
-                            <li><Link to="/all-user"><button className="btn w-3/4 mx-5 my-2">
+                            <li><Link to="/all-user"><button className="w-full mx-5 my-2">
                                     All User</button></Link></li>
+                            <li><Link to="/update-balance"><button className="w-full mx-5 my-2">
+                                    Update Balance</button></Link></li>
                             <li><Link to="/signup"><button className="w-full mx-5 my-2">
                                 Add Account</button></Link></li>
                             

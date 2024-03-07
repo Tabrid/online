@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthContext";
@@ -10,6 +10,20 @@ const ServerCopy = () => {
     const [nid, setNid] = useState("");
     const [birthday, setBirthday] = useState("");
     const { refresh , setRefresh ,balance} = useAuthContext();
+    const [Balance, setBalance] = useState({});
+    useEffect(() => {
+        const fetchBalance = async () => {
+          try {
+            const response = await fetch('/api/balance');
+            const data = await response.json();
+            setBalance(data);
+            
+          } catch (error) {
+            console.error('Error fetching balance:', error.message);
+          }
+        };
+        fetchBalance();
+      }, []);
     const handleNidChange = (e) => {
         setNid(e.target.value);
     };
@@ -23,7 +37,7 @@ const ServerCopy = () => {
         // Handle form submission here
         console.log("NID:", nid);
         console.log("Birthday:", birthday);
-        if (balance < 25) {
+        if (balance < Balance.serverBalance) {
           toast.error('Insufficient balance!');  
         }
         else{
@@ -33,7 +47,7 @@ const ServerCopy = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ balance: 25 }),
+            body: JSON.stringify({ balance: Balance.serverBalance }),
         })
             .then((response) => response.json())
             .then((data) => {

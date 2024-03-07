@@ -32,8 +32,8 @@ const AllOrder = () => {
         const formData = new FormData();
         formData.append('file', file);
         try {
-            const response = await fetch(`/api/order/update-form/${orderId}`, {
-                method: 'PUT',
+            const response = await fetch(`/api/apply/update-form/${orderId}`, {
+                method: 'POST',
                 body: formData,
             });
 
@@ -41,7 +41,7 @@ const AllOrder = () => {
                 throw new Error('Failed to update Apply');
             }
             setRefresh(!refresh);
-            toast('Apply updated successfully');
+            toast.success('Apply updated successfully');
             setRefresh(!refresh);
             // Handle success, maybe redirect or show a success message
         } catch (error) {

@@ -20,6 +20,7 @@ import MyProfile from "../Pages/MyProfile/MyProfile";
 import NoticeForm from "../Pages/NoticeForm/NoticeForm";
 import AdminRoutes from "./AdminRoutes";
 import AllUser from "../Pages/AllUser/AllUser";
+import BalanceForm from "../Pages/BalanceForm/BalanceForm";
 
 
  export const router = createBrowserRouter([
@@ -90,6 +91,10 @@ import AllUser from "../Pages/AllUser/AllUser";
         {
           path: "/all-user",
           element:<AdminRoutes><AllUser/></AdminRoutes> , 
+        },
+        {
+          path: "/update-balance",
+          element:<AdminRoutes><BalanceForm/>  </AdminRoutes> , 
         },
         
       ],

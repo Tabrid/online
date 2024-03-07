@@ -14,7 +14,7 @@ export const updateApply = async (req, res) => {
   const { id } = req.params; 
   const status = "approved";
   const file = req.body.file;
- 
+  
   try {
     const updatedApply = await Apply.findByIdAndUpdate(
       id,
