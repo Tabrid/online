@@ -3,7 +3,6 @@ import fs from "fs";
 
 export const uploadSingle = async (req, res, next) => {
   try {
-    console.log(req.file.path, "req.file.path");
     const uploadResponse = await cloudinary.uploader.upload(req.file.path);
     fs.unlink(req.file.path, (err) => {
       if (err) {
@@ -15,7 +14,7 @@ export const uploadSingle = async (req, res, next) => {
     // change hare as you need
     const { public_id, url } = uploadResponse;
 
-    req.body.file =  url;
+    req.body.file = url;
     next();
   } catch (error) {
     console.log(error);
