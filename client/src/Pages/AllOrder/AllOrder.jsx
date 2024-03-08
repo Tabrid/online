@@ -7,6 +7,7 @@ const AllOrder = () => {
     const [action, setAction] = useState("delivery"); // Default action is delivery
     const [file, setFile] = useState(null);
     const [note, setNote] = useState('');
+    const [loader , setLoader] = useState(false);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -32,6 +33,7 @@ const AllOrder = () => {
         const formData = new FormData();
         formData.append('file', file);
         try {
+            setLoader(true);
             const response = await fetch(`/api/apply/update-form/${orderId}`, {
                 method: 'POST',
                 body: formData,
@@ -42,7 +44,7 @@ const AllOrder = () => {
             }
             setRefresh(!refresh);
             toast.success('Apply updated successfully');
-            setRefresh(!refresh);
+            setLoader(false);
             // Handle success, maybe redirect or show a success message
         } catch (error) {
             console.error('Error updating Apply:', error.message);
@@ -79,7 +81,8 @@ const AllOrder = () => {
         <div>
             <div className="container mx-auto m-10">
                 <h1 className="text-2xl font-bold mb-4">Data List</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                {
+                    loader ? <h1>loading.......</h1> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                     {orders.map(item => (
                         <div key={item._id} className="bg-white rounded shadow p-4">
                             <p className="text-lg font-semibold mb-2">NID Number: {item.nidNumber}</p>
@@ -102,6 +105,7 @@ const AllOrder = () => {
                         </div>
                     ))}
                 </div>
+                }
 
             </div>
         </div>
