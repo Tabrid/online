@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../Context/AuthContext";
-
+import Marquee from "react-fast-marquee";
 
 const Recharge = () => {
     const [amount, setAmount] = useState('');
@@ -36,6 +36,9 @@ const Recharge = () => {
     return (
         <div>
             <div className="max-w-md mx-auto my-10">
+                <Marquee pauseOnHover={true}>
+                    <h1 className="text-xl  text-center">(01600644830) এই নম্বরে বিকাশ পেমেন্ট করে ইনফরমেশন  প্রদান করুন।।  </h1>
+                </Marquee>
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">

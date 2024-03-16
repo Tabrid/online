@@ -65,7 +65,7 @@ const NidOrder = () => {
             <div className="max-w-md mx-auto mt-8">
                 <h2 className="text-xl font-bold mb-4">Order Form</h2>
                 <Marquee>
-                <h2 className="text-xl font-bold mb-4">💢আপনার একাউন্ট থেকে 130tk কেটে নেয়া হবে ।💢</h2>
+                <h2 className="text-xl font-bold mb-4">💢আপনার একাউন্ট থেকে {Balance.nidBalance}tk কেটে নেয়া হবে ।💢</h2>
                 </Marquee>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">

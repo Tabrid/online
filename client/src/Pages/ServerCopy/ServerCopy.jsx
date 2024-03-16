@@ -61,12 +61,37 @@ const ServerCopy = () => {
             });
         }
     };
+    const handlev2 = () => {
+        if (balance < Balance.serverBalance) {
+            toast.error('Insufficient balance!');  
+          }
+          else{
+              navigate(`/server-copy-v2/${nid}/${birthday}`);
+          fetch('/api/users/update-balance', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ balance: Balance.serverBalance }),
+          })
+              .then((response) => response.json())
+              .then((data) => {
+                  console.log('Success:', data);
+                  toast.success('Order placed successfully!');
+                  setRefresh(!refresh);
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+                  toast.error('Something went wrong!');
+              });
+          }
+    }
     return (
         <div>
             <div className="max-w-md mx-auto mt-10 p-6 bg-gray-100 rounded-lg shadow-xl">
                 <h2 className="text-2xl font-semibold mb-4">Enter NID and Birthday</h2>
                 <Marquee>
-                <h2 className="text-xl font-bold mb-4">💢আপনার একাউন্ট থেকে 25tk কেটে নেয়া হবে ।💢</h2>
+                <h2 className="text-xl font-bold mb-4">💢আপনার একাউন্ট থেকে {Balance.serverBalance}tk কেটে নেয়া হবে ।💢</h2>
                 </Marquee>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -95,12 +120,20 @@ const ServerCopy = () => {
                             placeholder="YYYY-MM-DD"
                         />
                     </div>
+                    <div className="flex gap-5">
                     <button
                         type="submit"
                         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                     >
-                        Submit
+                        Server Copy V1
                     </button>
+                    <button
+                        
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    onClick={handlev2}>
+                        Server Copy V2
+                    </button>
+                    </div>
                 </form>
             </div>
         </div>

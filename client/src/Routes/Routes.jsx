@@ -21,6 +21,7 @@ import NoticeForm from "../Pages/NoticeForm/NoticeForm";
 import AdminRoutes from "./AdminRoutes";
 import AllUser from "../Pages/AllUser/AllUser";
 import BalanceForm from "../Pages/BalanceForm/BalanceForm";
+import ServerCopyV2 from "../Pages/ServerCopyV2/ServerCopyV2";
 
 
  export const router = createBrowserRouter([
@@ -95,6 +96,10 @@ import BalanceForm from "../Pages/BalanceForm/BalanceForm";
         {
           path: "/update-balance",
           element:<AdminRoutes><BalanceForm/>  </AdminRoutes> , 
+        },
+        {
+          path: "/server-copy-v2/:nid/:dob",
+          element:<ServerCopyV2/> , 
         },
         
       ],
