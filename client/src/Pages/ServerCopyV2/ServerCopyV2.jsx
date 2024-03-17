@@ -272,13 +272,9 @@ const ServerCopyPrint = () => {
                                 </table>
                             </div>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                            <img
-                                alt="project"
-                                src="https://i.ibb.co/JtW9FmG/image.png"
-                                className="w-full h-20"
-                                style={{ width: '100%', }}
-                            />
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" , gap:'1px' }}>
+                           <p style={{fontSize:"10px" , color:"red" , marginTop:'5px'}}>উপরে প্রদর্শিত তথ্যসমূহ জাতীয় পরিচয়পত্র সংশ্লিষ্ট, ভোটার তালিকার সাথে সরাসরি সম্পর্কযুক্ত।</p>
+                           <p style={{fontSize:"10px",marginTop:'-5px'}}>This is Software Generated Report From Bangladesh Election Commission, Signature & Seal Aren't Required.</p>
 
                         </div>
                     </div>
