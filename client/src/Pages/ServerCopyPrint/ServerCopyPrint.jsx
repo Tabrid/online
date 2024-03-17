@@ -1,17 +1,51 @@
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { GridLoader } from "react-spinners";
+import { useAuthContext } from "../../Context/AuthContext";
 
 const ServerCopyPrint = () => {
     const router = useParams();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
+    const { refresh , setRefresh } = useAuthContext();
+    const [Balance, setBalance] = useState({});
+    useEffect(() => {
+        const fetchBalance = async () => {
+          try {
+            const response = await fetch('/api/balance');
+            const data = await response.json();
+            setBalance(data);
+            
+          } catch (error) {
+            console.error('Error fetching balance:', error.message);
+          }
+        };
+        fetchBalance();
+      }, []);
     useEffect(() => {
         setLoading(true);
         fetch(`/api/apply/push?nid=${router.nid}&dob=${router.dob}`)
             .then((res) => res.json())
             .then((data) => {
                 setData(data);
+                fetch('/api/users/update-balance', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ balance: Balance.serverBalance }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Success:', data);
+                        toast.success('Order placed successfully!');
+                        setRefresh(!refresh);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        toast.error('Something went wrong!');
+                    });
                 setLoading(false);
 
             });

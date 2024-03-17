@@ -2,25 +2,58 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import QRCode from "react-qr-code";
+import { useAuthContext } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 const ServerCopyPrint = () => {
     const router = useParams();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
-
+    const { refresh , setRefresh } = useAuthContext();
     const componentRef = useRef();
     const [enName , setEnName] = useState(" ");
     const [nid, setNID] = useState(" ");
+    const [Balance, setBalance] = useState({});
     useEffect(() => {
-        setLoading(true);
-        fetch(`/api/apply/push?nid=${router.nid}&dob=${router.dob}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data);
-                setEnName(data?.data?.data?.nameEn);
-                setNID(data?.data?.data?.nationalId);
-                setLoading(false);
+            const fetchBalance = async () => {
+                try {
+                    const response = await fetch('/api/balance');
+                    const data = await response.json();
+                    setBalance(data);
+                    
+                } catch (error) {
+                    console.error('Error fetching balance:', error.message);
+                }
+            };
+            fetchBalance();
+        }, [Balance.serverBalance]);
+    useEffect(() => {
+            setLoading(true);
+            fetch(`/api/apply/push?nid=${router.nid}&dob=${router.dob}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                            setData(data);
+                            setEnName(data?.data?.data?.nameEn);
+                            setNID(data?.data?.data?.nationalId);
+                            fetch('/api/users/update-balance', {
+                                    method: 'PUT',
+                                    headers: {
+                                            'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({ balance: Balance.serverBalance }),
+                            })
+                                    .then((response) => response.json())
+                                    .then((data) => {
+                                            console.log('Success:', data);
+                                            toast.success('Order placed successfully!');
+                                            setRefresh(!refresh);
+                                    })
+                                    .catch((error) => {
+                                            console.error('Error:', error);
+                                            toast.error('Something went wrong!');
+                                    });
+                            setLoading(false);
 
-            });
+                    });
     }, [router.nid, router.dob]);
     console.log(data);
     const generateQRCode = () => {
@@ -112,20 +145,22 @@ const ServerCopyPrint = () => {
 
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>পিন নম্বর</td>
-                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>{data?.data?.data?.pin}</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>ফরম নম্বর</td>
+                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>ভোটার নম্বর </td>
                                             <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>{data?.voter?.voting_serial}</td>
 
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>ভোটার নম্বর </td>
+                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>ভোটার সিরিয়াল</td>
                                             <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>{data?.voter?.slno}</td>
 
                                         </tr>
+                                        <tr>
+                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>এরিয়া কোড</td>
+                                            <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>{data?.voter?.voterAreaCode}</td>
+
+                                        </tr>
+                                        
+                                        
                                         <tr>
                                             <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>ভোটার এলাকা</td>
                                             <td style={{ border: '1px solid #EEEEEE', padding: '4px' }}>{data?.voter?.voterArea}</td>

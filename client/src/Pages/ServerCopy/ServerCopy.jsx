@@ -9,7 +9,7 @@ const ServerCopy = () => {
     const navigate = useNavigate();
     const [nid, setNid] = useState("");
     const [birthday, setBirthday] = useState("");
-    const { refresh , setRefresh ,balance} = useAuthContext();
+    const { balance} = useAuthContext();
     const [Balance, setBalance] = useState({});
     useEffect(() => {
         const fetchBalance = async () => {
@@ -42,23 +42,7 @@ const ServerCopy = () => {
         }
         else{
             navigate(`/server-copy-print/${nid}/${birthday}`);
-        fetch('/api/users/update-balance', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ balance: Balance.serverBalance }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
-                toast.success('Order placed successfully!');
-                setRefresh(!refresh);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                toast.error('Something went wrong!');
-            });
+        
         }
     };
     const handlev2 = () => {
@@ -67,23 +51,7 @@ const ServerCopy = () => {
           }
           else{
               navigate(`/server-copy-v2/${nid}/${birthday}`);
-          fetch('/api/users/update-balance', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ balance: Balance.serverBalance }),
-          })
-              .then((response) => response.json())
-              .then((data) => {
-                  console.log('Success:', data);
-                  toast.success('Order placed successfully!');
-                  setRefresh(!refresh);
-              })
-              .catch((error) => {
-                  console.error('Error:', error);
-                  toast.error('Something went wrong!');
-              });
+          
           }
     }
     return (

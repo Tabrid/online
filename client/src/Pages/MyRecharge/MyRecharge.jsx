@@ -43,7 +43,7 @@ const MyRecharge = () => {
                                     {transaction.transId}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    ${transaction.amount}
+                                    {transaction.amount}tk
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     {transaction.status}
